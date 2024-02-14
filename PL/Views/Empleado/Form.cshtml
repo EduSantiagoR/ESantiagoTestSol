@@ -1,0 +1,46 @@
+﻿@model ML.Empleado
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Formulario</h2>
+<hr />
+<div>
+    @using (Html.BeginForm("Form", "Empleado", FormMethod.Post, new { enctype = "multiárt/form-data" }))
+    {
+        @Html.HiddenFor(model => model.IdEmpleado)
+        <div class="row mb-3">
+            <div class="col col-4">
+                <label>Nombre</label>
+                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder = "Nombre" })
+            </div>
+            <div class="col col-4">
+                <label>Apellido paterno</label>
+                @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @placeholder = "Apellido paterno" })
+            </div>
+            <div class="col col-4">
+                <label>Apellido materno</label>
+                @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @placeholder = "Nombre" })
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col col-4">
+                <label>Fecha de nacimiento</label>
+                @Html.TextBoxFor(model => model.FechaNacimiento, "{0:yyyy-MM-dd}", new { @class = "form-control", @type="date" })
+            </div>
+            <div class="col col-4">
+                <label>Sueldo</label>
+                @Html.TextBoxFor(model => model.Sueldo, new { @class = "form-control", @placeholder = "0.0" })
+            </div>
+            <div class="col col-4">
+                <label>Área</label>
+                @Html.DropDownListFor(model => model.Area.IdArea, new SelectList(Model.Area.Areas, "IdArea", "Nombre"), "Selecciona un área", new { @class="form-control" })
+            </div>
+        </div>
+        <div>
+            <a class="btn btn-danger" href="@Url.Action("GetAll", "Empleado")">Volver</a>
+            <button class="btn btn-success" type="submit">Guardar</button>
+        </div>
+    }
+</div>
